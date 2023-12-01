@@ -9,14 +9,26 @@ import (
 	"url-shortener/services"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
+	_ "url-shortener/docs"
 )
 
-var postgresdsn = helpers.GetEnv("POSTGRES_DSN", "")
+// gin-swagger middleware
 
+var postgresdsn = helpers.GetEnv("MYSQL_DSN", "")
+
+// @title           Url shortener
+// @version         1.0
+// @description     This API allows you to shorten your links and redirect your webpage to a specified link.
+// @host      localhost:8080
+// @BasePath  /
 func main() {
-	db, err := gorm.Open(postgres.Open(postgresdsn))
+	db, err := gorm.Open(mysql.Open(postgresdsn))
 	if err != nil {
 		log.Fatal("Failed to connect DB")
 	}
@@ -27,7 +39,7 @@ func main() {
 
 	urlRepo := repositories.DefaultUrlRepository(db)
 	urlService := services.DefaultUrlService(urlRepo)
-	controller := api.DefaultUrlontroller(urlService)
+	controller := api.DefaultUrlController(urlService)
 
 	urlGroup := gin.Group("/")
 	{
@@ -35,6 +47,7 @@ func main() {
 		urlGroup.GET("/get", controller.Get)
 	}
 
+	gin.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	err = gin.Run()
 	if err != nil {
 		log.Fatal(err)

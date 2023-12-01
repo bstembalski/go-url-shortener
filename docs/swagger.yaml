@@ -1,0 +1,97 @@
+basePath: /
+definitions:
+  responses.CreateUrl:
+    properties:
+      originalURL:
+        type: string
+    type: object
+  responses.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  responses.GetUrl:
+    properties:
+      originalUrl:
+        type: string
+      shortUrl:
+        type: string
+    type: object
+  responses.GetUrlRequest:
+    properties:
+      shortUrl:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This API allows you to shorten your links and redirect your webpage
+    to a specified link.
+  title: Url shortener
+  version: "1.0"
+paths:
+  /create:
+    post:
+      consumes:
+      - application/json
+      operationId: create-url
+      parameters:
+      - description: Create URL request body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/responses.CreateUrl'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Short URL successfully created
+          schema:
+            type: string
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "401":
+          description: Error response
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "500":
+          description: Error response
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+      summary: Creates a short URL
+  /get:
+    get:
+      consumes:
+      - application/json
+      operationId: get-url
+      parameters:
+      - description: Get URL request body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/responses.GetUrlRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: URL information
+          schema:
+            $ref: '#/definitions/responses.GetUrl'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "401":
+          description: Error response
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "500":
+          description: Error response
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+      summary: Shows URL information
+swagger: "2.0"
