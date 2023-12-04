@@ -1,0 +1,3 @@
+environment:
+  - WAIT_HOSTS=db:3306
+  - WAIT_HOSTS_TIMEOUT=15

@@ -11,6 +11,7 @@ type UrlRepository interface {
 	Create(url models.Url) error
 
 	GetUrl(shortUrl string) (models.Url, error)
+	GetAllUrls() (models.Url, error)
 }
 
 func DefaultUrlRepository(db *gorm.DB) UrlRepository {
@@ -38,6 +39,17 @@ func (r *urlRepo) GetUrl(shortUrl string) (models.Url, error) {
 	url := models.Url{}
 
 	result := r.db.First(&url, "short_url = ?", shortUrl)
+	if result.Error != nil {
+		return models.Url{}, result.Error
+	}
+
+	return url, nil
+}
+
+func (r *urlRepo) GetAllUrls() (models.Url, error) {
+	var url models.Url
+
+	result := r.db.Find(&url)
 	if result.Error != nil {
 		return models.Url{}, result.Error
 	}

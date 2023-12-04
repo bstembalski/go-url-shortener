@@ -20,7 +20,7 @@ import (
 
 // gin-swagger middleware
 
-var postgresdsn = helpers.GetEnv("MYSQL_DSN", "")
+var postgresdsn = helpers.GetEnv("MYSQL_DSN", "root:root@tcp(127.0.0.1:3306)/url-shortener?charset=utf8mb4&parseTime=True&loc=Local")
 
 // @title           Url shortener
 // @version         1.0
@@ -43,8 +43,9 @@ func main() {
 
 	urlGroup := gin.Group("/")
 	{
-		urlGroup.POST("/create", controller.Create)
+		urlGroup.GET("/", controller.GetAllUrls)
 		urlGroup.GET("/get", controller.Get)
+		urlGroup.POST("/create", controller.Create)
 	}
 
 	gin.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

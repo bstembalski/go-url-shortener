@@ -12,6 +12,7 @@ import (
 type UrlController interface {
 	Create(c *gin.Context)
 	Get(c *gin.Context)
+	GetAllUrls(c *gin.Context)
 }
 
 func DefaultUrlController(urlService services.UrlService) UrlController {
@@ -82,5 +83,24 @@ func (ctr *urlController) Get(c *gin.Context) {
 	info.OriginalURL = urlInfo.OriginalURL
 	info.ShortURL = urlInfo.ShortURL
 
-	c.JSON(http.StatusOK, gin.H{"URL": info})
+	c.JSON(http.StatusOK, info)
+}
+
+// Get all URLs
+// @Summary Shows all urls
+// @ID get-all-urls
+// @Accept json
+// @Produce json
+// @Success 200 {array} responses.GetAllUrls "All urls"
+// @Failure 400,401,500 {object} responses.ErrorResponse "Error response"
+// @Router / [get]
+func (ctr *urlController) GetAllUrls(c *gin.Context) {
+	urls, err := ctr.urlService.GetAll()
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusInternalServerError, nil)
+		return
+	}
+
+	c.JSON(http.StatusOK, urls)
 }

@@ -11,6 +11,7 @@ type UrlService interface {
 	Create(originalURL string) (string, error)
 
 	Get(shortURL string) (models.Url, error)
+	GetAll() (models.Url, error)
 }
 
 func DefaultUrlService(repo repositories.UrlRepository) UrlService {
@@ -46,6 +47,15 @@ func (s *urlService) Create(originalURL string) (string, error) {
 
 func (s *urlService) Get(shortURL string) (models.Url, error) {
 	url, err := s.repo.GetUrl(shortURL)
+	if err != nil {
+		return models.Url{}, err
+	}
+
+	return url, nil
+}
+
+func (s *urlService) GetAll() (models.Url, error) {
+	url, err := s.repo.GetAllUrls()
 	if err != nil {
 		return models.Url{}, err
 	}
