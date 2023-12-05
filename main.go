@@ -8,6 +8,8 @@ import (
 	"url-shortener/repositories"
 	"url-shortener/services"
 
+	helmet "github.com/danielkov/gin-helmet"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -35,7 +37,9 @@ func main() {
 	db.AutoMigrate(&models.Url{})
 
 	gin := gin.Default()
-	// gin.Use(helmet.Default())
+
+	gin.Use(helmet.Default())
+	gin.Use(cors.Default())
 
 	urlRepo := repositories.DefaultUrlRepository(db)
 	urlService := services.DefaultUrlService(urlRepo)

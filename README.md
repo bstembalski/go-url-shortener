@@ -1,37 +1,36 @@
 # go-url-shortener
- [![GoDoc](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://badges.mit-license.org)
-
+[![GoDoc](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
 
 ---
 
 ## Usage
 
-Aby zainstalować projekt, można skorzystać z Dockera lub postawić bazę danych MySQL lokalnie. Poniżej znajdują się komendy do uruchomienia projektu:
+To install the project, you can use Docker or set up a local MySQL database. Below are the commands to run the project:
 
-#### Użycie Dockera
+#### Using Docker
 
 ```bash
 docker-compose up
 ```
-#### Lokalna instalacja z bazą danych MySQL
-1. Konfiguracja bazy danych
+
+#### Local Installation with MySQL Database
+1. Database Configuration
 ```bash
-# Uruchom serwer MySQL lokalnie
-# Uzytkownik MySQL: root
-# Haslo MySQL: root
-# Nazwa bazy danych: url-shortener
-# Port bazy danych: 127.0.0.1:3306
+# Run the MySQL server locally
+# MySQL User: root
+# MySQL Password: root
+# Database Name: url-shortener
+# Database Port: 127.0.0.1:3306
 ```
 
-2. Uruchomienie projektu:
+2. Run the project:
 ```bash
 go run .
 ```
 
-## Dokumentacja API
+## API Documentation
 
-Po uruchomieniu projektu, sprawdź [Dokumentację Swaggera](http://localhost:8080/swagger/index.html) dla informacji na temat dostępnych endpointów, parametrów i odpowiedzi.
-
+After starting the project, check the [Swagger Documentation](http://localhost:8080/swagger/index.html) for information on available endpoints, parameters, and responses.
 
 ## Technology Stack
 
@@ -40,12 +39,12 @@ Po uruchomieniu projektu, sprawdź [Dokumentację Swaggera](http://localhost:808
 - [Swaggo](https://github.com/swaggo/swag)
 - MySQL
 
-## Licencja
+## License
 
-Ten projekt jest dostępny na podstawie licencji MIT. Szczegóły można znaleźć w pliku LICENSE.
+This project is available under the MIT license. Details can be found in the LICENSE file.
 
 ## Contributing
 
 #### Bug Reports & Feature Requests
 
-Prosimy korzystać z [issue tracker](https://github.com/bstembalski/go-url-shortener/issues) do zgłaszania błędów lub prośb o nowe funkcje.
+Please use the [issue tracker](https://github.com/bstembalski/go-url-shortener/issues) to report bugs or request new features.
