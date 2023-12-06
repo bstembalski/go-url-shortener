@@ -1,6 +1,7 @@
 # go-url-shortener
 [![GoDoc](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
 
+Project created from the heart, aimed at showcasing the progress of my Go programming skills and acquired knowledge.
 ---
 
 ## Usage
